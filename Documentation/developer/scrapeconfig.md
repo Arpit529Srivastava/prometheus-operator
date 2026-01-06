@@ -34,6 +34,8 @@ spec:
 With this example, all `ScrapeConfig` having the `prometheus` label set to `system-monitoring-prometheus` will be used
 to generate scrape configurations.
 
+> **Note:** Since `scrapeConfigNamespaceSelector` is not specified, this example only selects `ScrapeConfigs` from the same namespace as the Prometheus resource.
+
 ## Namespace Selection
 
 To select `ScrapeConfigs` based on the namespace, `scrapeConfigNamespaceSelector` field can be used.
@@ -62,18 +64,6 @@ spec:
   scrapeConfigNamespaceSelector:
     matchLabels:
       environment: production
-```
-
-### Select ScrapeConfigs from the current namespace only
-
-If `scrapeConfigNamespaceSelector` is not specified (null), only `ScrapeConfigs` from the same namespace as the Prometheus resource will be selected:
-
-```yaml
-spec:
-  scrapeConfigSelector:
-    matchLabels:
-      prometheus: system-monitoring-prometheus
-  # scrapeConfigNamespaceSelector is not set, so only the current namespace is matched
 ```
 
 > **Note:** An empty selector (`{}`) matches all objects/namespaces. A null selector (field not specified) matches no objects for `scrapeConfigSelector`, or only the current namespace for `scrapeConfigNamespaceSelector`.

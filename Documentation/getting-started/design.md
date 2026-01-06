@@ -87,8 +87,12 @@ The `PrometheusRule` CRD allows the definition of alerting and recording rules t
 
 ### Resource Selectors
 
-Instance-based resources use selector fields to discover and associate config-based resources. The `Prometheus` and `PrometheusAgent` CRDs have `serviceMonitorSelector`, `podMonitorSelector`, `probeSelector`, `scrapeConfigSelector`, and `ruleSelector` fields to select which configuration resources should be included. Similarly, the `Alertmanager` CRD has `alertmanagerConfigSelector` and `ThanosRuler` has `ruleSelector` for selecting their respective config resources. Each selector also has a corresponding namespace selector field (e.g., `serviceMonitorNamespaceSelector`, `scrapeConfigNamespaceSelector`) to control which namespaces are searched for config resources.
+Instance-based resources use selector fields to discover and associate config-based resources. The `Prometheus` CRD has `serviceMonitorSelector`, `podMonitorSelector`, `probeSelector`, `scrapeConfigSelector`, and `ruleSelector` fields to select which configuration resources should be included. The `PrometheusAgent` CRD has the same selectors except `ruleSelector`. Similarly, the `Alertmanager` CRD has `alertmanagerConfigSelector` and `ThanosRuler` has `ruleSelector` for selecting their respective config resources. Each selector also has a corresponding namespace selector field (e.g., `serviceMonitorNamespaceSelector`, `scrapeConfigNamespaceSelector`) to control which namespaces are searched for config resources.
 
-The selector fields follow standard Kubernetes label selector semantics: an empty selector (`{}`) matches all objects, a null selector (field not specified) matches no objects for resource selectors or only the current namespace for namespace selectors, and a label selector matches objects with the specified labels.
+The selector fields follow standard Kubernetes label selector semantics:
+
+* An empty selector (`{}`) matches all objects.
+* A null selector (field not specified) matches no objects for resource selectors, or only the current namespace for namespace selectors.
+* A label selector matches objects with the specified labels.
 
 You can check the examples mentioned [here](../developer/scrapeconfig.md).
